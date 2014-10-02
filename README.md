@@ -54,7 +54,7 @@ maWizard.init({
 	template: "countryView"
 }
 ````
-Calling the `create()` method a new document is inserted into the database and the corresponding `_id` is set in the data context, thus switching to "update" mode.
+Calling the `create()` method a new document is inserted into the database and the corresponding `_id` is set in the data context (and is the return value of create() method), thus switching to "update" mode.
 
 
 #### Update mode

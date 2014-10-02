@@ -257,6 +257,7 @@ function maWizardConstructor() {
 
 			data["_id"] = id;
 			this.setDataContext(data);
+			return id;
 		}
 		else return false;
 	};
