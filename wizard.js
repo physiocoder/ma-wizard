@@ -562,7 +562,7 @@ function maWizardConstructor() {
 			'click [data-ma-wizard-back]': backToBase,
 			'click [data-ma-wizard-create]': function(evt, templ) {
 				if(maWizard.create())
-					Router.go(maWizard.baseRoute + "/" + maWizard.getDataContext()._id);
+					Router.go("/" + maWizard.baseRoute + "/" + maWizard.getDataContext()._id);
 			},
 			'click [data-ma-wizard-delete]': function(evt,templ) {
 				bootbox.confirm("Are you sure?", function(result) {
