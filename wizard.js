@@ -721,6 +721,7 @@ Router.go = function () {
 			$('#' + maWizard.getTemplateName() + ' .modal.ma-wizard-modal')
 				.on('hidden.bs.modal', function() {
 					go.apply(self, args);
+					maWizard.reset();
 				})
 				.modal('hide');
 		else go.apply(self, args);
@@ -732,7 +733,6 @@ Router.go = function () {
 			bootbox.alert("Invalid data present. Please correct them or discard changes.");
 		else {
 			customGo();
-			maWizard.reset();
 		}
 	}
 	else customGo();
