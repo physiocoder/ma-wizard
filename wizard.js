@@ -16,6 +16,7 @@ function maWizardConstructor() {
 	var isModal;
 	var initializedTemplates = [];
 	var dbReplica;
+	var removingFromDB;
 	var self = this;
 
 	/**
@@ -375,6 +376,15 @@ function maWizardConstructor() {
 	};
 
 	/**
+	 * Set the current document to be removed from database when abandoning wizard
+	 * Without parameters returns if the document must be removed
+	 * @param  {Bool} bool - true to remove on abandonig
+	 */
+	this.removeWhenExit= function(bool) {
+		return (bool === undefined) ? removingFromDB : removingFromDB = bool;
+	};
+
+	/**
 	 * Returns true if the data context is different from the document in database. False otherwise.
 	 */
 	this.hasChanged = function() {
@@ -464,6 +474,8 @@ function maWizardConstructor() {
 			this.setStandardEventHandlers(conf.template);
 			initializedTemplates.push(conf.template);
 		}
+
+		removingFromDB = false;
 	};
 
 	/**
@@ -566,8 +578,12 @@ function maWizardConstructor() {
 			},
 			'click [data-ma-wizard-delete]': function(evt,templ) {
 				bootbox.confirm("Are you sure?", function(result) {
-					if(result && maWizard.removeFromDatabase())
-						Router.go(maWizard.baseRoute);
+					if(result) {
+						setTimeout(function() { // to wait for bootbox hiding
+							maWizard.removeWhenExit(true);
+							backToBase();
+						}, 0);
+					}
 				});
 			}
 		});
@@ -721,6 +737,8 @@ Router.go = function () {
 			$('#' + maWizard.getTemplateName() + ' .modal.ma-wizard-modal')
 				.on('hidden.bs.modal', function() {
 					go.apply(self, args);
+					if(maWizard.removeWhenExit())
+						maWizard.removeFromDatabase();
 					maWizard.reset();
 				})
 				.modal('hide');
