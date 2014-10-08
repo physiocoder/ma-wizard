@@ -46,7 +46,7 @@ Once the package is installed, the global `maWizard` object is available. This p
 To use `maWizard` with a Bootstrap modal, set the `isModal` parameter to `true` in `init()` and add the `ma-wizard-modal` class to the modal HTML element.
 
 #### Create mode
-If no `id` is specified in `conf`, `maWizard` is initialized in "create" mode.  This means that the data context is initialized with an object built from the schema and whose values are default. The `_id` field will be `undefined` until the `maWizard.create()` method is called.
+If no `id` is specified in `conf` (or a value of `'add'` is specified), `maWizard` is initialized in "create" mode.  This means that the data context is initialized with an object built from the schema and whose values are default. The `_id` field will be `undefined` until the `maWizard.create()` method is called.
 Example:
 ````javascript
 maWizard.init({

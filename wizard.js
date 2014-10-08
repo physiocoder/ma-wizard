@@ -39,7 +39,7 @@ function maWizardConstructor() {
 
 	var loadFromDatabase = function(id) {
 		// if no id is specified I am adding a new object
-		if(id === undefined)
+		if(id === undefined || id === 'add')
 			dbReplica = {};
 		else
 			dbReplica = collection.findOne(id);
