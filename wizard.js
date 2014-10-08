@@ -224,8 +224,10 @@ function maWizardConstructor() {
 		// [cit. aldeed - Simple-Schema author]
 		schema.clean(plainObj);
 
-		if(Object.keys(plainObj).length === 0)
-			plainObj[field] = undefined;
+		// since .clean() by default removes fields with empty string, make sure
+		// an empty string is seen as explicitly undefined from data context and validation
+		if(plainObj[field] === undefined) // field is not present
+			plainObj[field] = undefined;		// make field present with an undefined value so that validation can (in case) fail
 
 		// update the data context
 		this.updateContext(plainObj);
