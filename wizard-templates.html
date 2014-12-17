@@ -69,9 +69,9 @@
           {{/if}}
         </label>
       {{#if placeholder}}
-        <input type="text" class="form-control " data-ma-wizard-control placeholder={{placeholder}} value={{maWizardGetFieldValue field}} data-schemafield={{field}} autofocus maxlength={{maWizardMaxLength field}}>
+        <input type="text" class="form-control " data-ma-wizard-control placeholder={{placeholder}} value={{maWizardGetFieldValue field}} data-schemafield={{field}} maxlength={{maWizardMaxLength field}}>
       {{else}}
-        <input type="text" class="form-control " data-ma-wizard-control placeholder="{{maWizardGetFieldLabel field}}..." value={{maWizardGetFieldValue field}} data-schemafield={{field}} autofocus maxlength={{maWizardMaxLength field}}>
+        <input type="text" class="form-control " data-ma-wizard-control placeholder="{{maWizardGetFieldLabel field}}..." value={{maWizardGetFieldValue field}} data-schemafield={{field}} maxlength={{maWizardMaxLength field}}>
       {{/if}}
       <span class="help-block">{{maWizardErrMsg field}}</span>
     </div>
