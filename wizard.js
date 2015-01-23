@@ -735,16 +735,25 @@ Router.go = function () {
 	var args = arguments;
 
 	function customGo() {
-		if(maWizard.isModal())
-			$('#' + maWizard.getTemplateName() + ' .modal.ma-wizard-modal')
-				.on('hidden.bs.modal', function() {
-					go.apply(self, args);
-					if(maWizard.removeWhenExit())
-						maWizard.removeFromDatabase();
-					maWizard.reset();
-				})
-				.modal('hide');
-		else go.apply(self, args);
+		if(maWizard.getDataContext()) {
+			if(maWizard.isModal())
+				$('#' + maWizard.getTemplateName() + ' .modal.ma-wizard-modal')
+					.on('hidden.bs.modal', function() {
+						go.apply(self, args);
+						if(maWizard.removeWhenExit())
+							maWizard.removeFromDatabase();
+						maWizard.reset();
+					})
+					.modal('hide');
+			else {
+				go.apply(self, args);
+				if(maWizard.removeWhenExit())
+					maWizard.removeFromDatabase();
+				maWizard.reset();
+			}			
+		} else {
+			go.apply(self,args);
+		}
 	}
 	
 	if(maWizard.getDataContext() && maWizard.getDataContext()._id) {
